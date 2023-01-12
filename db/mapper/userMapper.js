@@ -1,5 +1,4 @@
 const { MongoClient } = require('mongodb');
-const url = 'mongodb://localhost:27017';
 
 async function createUser(newUser) {}
 
@@ -7,16 +6,15 @@ async function deleteUser(id) {}
 
 async function updateUser(id, newUser) {}
 
-async function findUser(name, password) {
-  const client = new MongoClient(url);
+async function queryUser(name, password) {
+  const client = new MongoClient(process.env.DB_URL);
   try {
     const document = client.db('document');
     const users = document.collection('user');
     const user = await users.findOne({ name, password });
-
     return user
-      ? { exit: true, username: user.name, user_id: user._id, role: user.role }
-      : { exit: false };
+      ? { username: user.name, user_id: user._id, role: user.role }
+      : undefined;
   } catch (err) {
     throw err;
   } finally {
@@ -28,5 +26,5 @@ module.exports = {
   createUser,
   deleteUser,
   updateUser,
-  findUser,
+  queryUser,
 };

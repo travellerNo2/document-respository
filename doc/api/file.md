@@ -1,0 +1,14 @@
+- GET /file/{user_id}/info
+  - get all files information of a user
+  - response: \[{file_id: string, file_name: string, size: string}\]
+- POST /file/{user_id}/upload
+  - upload a file
+  - response: status 200
+- GET /file/{user_id}/download/{file_id}
+  - download a file
+  - response: file
+- GET /file/{user_id}/storage-space
+  - get total available storage space and used storage space of the user
+  - response: {max_storage: number, curr_storage: number}
+- DELETE /file/{user_id}/{file_id}
+- response: status OK

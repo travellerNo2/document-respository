@@ -1,7 +1,7 @@
-const userMapper = require("../mapper/userMapper");
+const userMapper = require('../mapper/userMapper');
 
-async function findUser(name, password) {
-  return await userMapper.findUser(name, password);
+function findUser(name, password) {
+  return userMapper.queryUser(name, password);
 }
 
 module.exports = {

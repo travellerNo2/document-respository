@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const userRouter = require('./routes/user');
@@ -29,10 +30,7 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error(err.message);
-  res.type('text/plain');
-  res.status(500);
-  res.send('500 - Server Error');
+  res.status(500).send({ details: err.message });
 });
 
 app.listen(port, () => {

@@ -4,15 +4,14 @@ const userImpl = require('../db/implement/userImpl');
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-  console.log('username:', username, 'password:', password);
   userImpl
     .findUser(username, password)
     .then((user) => {
-      if (user.exit) {
+      if (!!user) {
         res.status(201).send(user);
       } else {
         res.status(404).send({
-          detail: 'user or password is not right',
+          details: 'user or password is not right',
         });
       }
     })
